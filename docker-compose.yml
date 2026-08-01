@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - B2_KEY_ID=${B2_KEY_ID}
+      - B2_APP_KEY=${B2_APP_KEY}
+      - B2_BUCKET_UPLOADS=${B2_BUCKET_UPLOADS}
+      - B2_BUCKET_GENERATED=${B2_BUCKET_GENERATED}
+      - B2_BUCKET_PROVENANCE=${B2_BUCKET_PROVENANCE}
+      - GENBLAZE_API_KEY=${GENBLAZE_API_KEY}
+      - REDIS_URL=${REDIS_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - RUNWAY_API_KEY=${RUNWAY_API_KEY}
+      - LUMA_API_KEY=${LUMA_API_KEY}
+      - GMI_API_KEY=${GMI_API_KEY}
+      - NVIDIA_NIM_API_KEY=${NVIDIA_NIM_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  frontend:
+    build: ./frontend
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
