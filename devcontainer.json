@@ -1,0 +1,9 @@
+{
+  "name": "MediaFlux Codespace",
+  "image": "mcr.microsoft.com/devcontainers/python-node:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "pip install -r backend/requirements.txt && cd frontend && npm install"
+}
+
