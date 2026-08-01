@@ -1,0 +1,18 @@
+from genblaze import Pipeline
+from .config import settings
+from .events import publish_event
+from .b2_client import upload_bytes
+from .provenance import build_manifest
+
+pipeline = Pipeline(api_key=settings.GENBLAZE_API_KEY)
+
+@pipeline.step(provider="gmi.audio")
+def extract_audio(job_id: str, video_bytes: bytes):
+    publish_event(job_id, "extract_audio", "running")
+    audio_bytes = b"..."  # TODO: real provider call
+    upload_bytes(settings.B2_BUCKET_GENERATED, f"{job_id}/audio/raw.wav", audio_bytes, "audio/wav")
+    publish_event(job_id, "extract_audio", "done")
+    return audio_bytes
+
+# Repeat similar skeletons for generate_narration, detect_scenes, generate_images,
+# generate_broll, assemble, upscale, then build and upload manifest.
