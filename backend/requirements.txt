@@ -1,8 +1,9 @@
 fastapi
-uvicorn[standard]
+uvicorn
 pydantic
 python-dotenv
 redis
-backblaze-b2
-genblaze
-httpx
+b2sdk
+requests
+
+
