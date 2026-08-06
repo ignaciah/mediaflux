@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { UploadForm } from "../components/uploadForm";
-import { ProgressStream } from "../components/ProgressStream";
+import UploadForm from "@/components/UploadForm";
+import ProgressStream from "@/components/ProgressStream";
 
 export default function Home() {
   const [jobId, setJobId] = useState<string | null>(null);
