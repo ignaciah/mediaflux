@@ -1,6 +1,12 @@
 name = "mediaflux-frontend"
 compatibility_date = "2024-01-01"
 
+# Cloudflare Pages build output
 [site]
 bucket = "./dist"
 entry-point = "workers-site"
+
+# Optional: enable Node compatibility for Next.js features
+[build]
+command = "npm run build"
+
