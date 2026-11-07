@@ -18,3 +18,14 @@
     "typescript": "^7.0.2"
   }
 }
+{
+  "name": "mediaflux-frontend",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
